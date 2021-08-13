@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContatoComponent implements OnInit {
 
+  public valor: string = "alguma coisa";
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  public restaura(): void{
+    this.valor = "valor inicial"
+  }
 }

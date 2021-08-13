@@ -9,17 +9,17 @@ import { Cliente } from '../model/Cliente';
 })
 export class CorpoComponent implements OnInit {
 
-  public cliente: Cliente;
+  cliente: Cliente;
+  lista: Cliente[] = []; //inicializa a lista vazia
 
   constructor(private nav: Router) {
-    this.cliente = new Cliente();
-
-    this.cliente.id = 9876;
-    this.cliente.nome = "Pedro";
-    this.cliente.email = "pedro@pedro.com";
-    this.cliente.endereco = "Rua das lagrimas";
-
-    console.log(this.cliente);
+    
+    this.cliente = new Cliente(9876, "Pedro", "pedro@pedro.com", "Rua das Lagrimas", true);
+    let i: number;
+    for(i=0; i<10; i++){
+      this.lista.push(new Cliente(i, "cli"+i, "End"+i, "email"+i, true));
+    }
+    
    }
 
   ngOnInit(): void {
