@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cliente } from '../model/Cliente';
+import { Usuario } from '../model/Usuario';
+import { UsuarioService } from '../services/usuario.service';
 
 @Component({
   selector: 'app-corpo',
@@ -9,28 +11,32 @@ import { Cliente } from '../model/Cliente';
 })
 export class CorpoComponent implements OnInit {
 
-  cliente: Cliente;
-  lista: Cliente[] = []; //inicializa a lista vazia
+  //cliente: Cliente;
+  //lista: Cliente[] = []; //inicializa a lista vazia
+  listaUsuario: Usuario[] = [];
 
-  constructor(private nav: Router) {
-    
-    this.cliente = new Cliente(9876, "Pedro", "pedro@pedro.com", "Rua das Lagrimas", true);
-    let i: number;
-    for(i=0; i<10; i++){
-      this.lista.push(new Cliente(i, "cli"+i, "End"+i, "email"+i, true));
-    }
-    
-   }
+  constructor(private nav: Router, private service: UsuarioService) {
 
-  ngOnInit(): void {
+  }
+
+  ngOnInit(): void{
+    this.service.recuperarUsuarios().subscribe(
+      (res: Usuario[]) => {
+        this.listaUsuario = res;
+        console.log(this.listaUsuario);
+      },
+      (err) => {
+        alert(err);
+      }
+    );
   }
 
   navegar(){
     this.nav.navigate(["/sobre"])
   }
 
-  alterar(){
+ /* alterar(){
     this.cliente.nome = "Mota, Pedro";
-  }
+  }*/
 
 }
